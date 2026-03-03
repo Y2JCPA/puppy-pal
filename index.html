@@ -7,33 +7,29 @@
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 body{font-family:'Segoe UI',system-ui,sans-serif;background:#1a1a2e;color:#e0e0e0;min-height:100vh;overflow-x:hidden}
-
-/* SCREENS */
 .screen{display:none;min-height:100vh;flex-direction:column;align-items:center;justify-content:center;padding:20px}
 .screen.active{display:flex}
 
-/* TITLE SCREEN */
+/* TITLE */
 #title-screen{background:linear-gradient(135deg,#1a1a2e,#16213e,#0f3460);text-align:center}
-#title-screen h1{font-size:3em;margin-bottom:8px}
-#title-screen .title-emoji{font-size:5em;margin-bottom:20px;animation:bounce 1.5s infinite}
+#title-screen h1{font-size:3em;margin-bottom:8px;color:#c9a84c}
+.title-dog-wrap{width:120px;height:100px;margin:0 auto 20px;animation:bounce 1.5s infinite}
 @keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-15px)}}
 #title-screen .tagline{color:#aaa;font-size:1.1em;margin-bottom:40px}
 .btn{padding:14px 36px;border:none;border-radius:12px;font-size:1.1em;font-weight:bold;cursor:pointer;transition:all .2s;font-family:inherit}
 .btn:hover{transform:scale(1.05)}
-.btn-primary{background:#c9a84c;color:#1a1a2e}
-.btn-primary:hover{background:#daa520}
-.btn-secondary{background:transparent;border:2px solid #c9a84c;color:#c9a84c;margin-top:12px}
-.btn-secondary:hover{background:#c9a84c22}
+.btn-primary{background:#c9a84c;color:#1a1a2e}.btn-primary:hover{background:#daa520}
+.btn-secondary{background:transparent;border:2px solid #c9a84c;color:#c9a84c;margin-top:12px}.btn-secondary:hover{background:#c9a84c22}
 
-/* PICK SCREEN */
+/* PICK */
 #pick-screen{background:linear-gradient(135deg,#1a1a2e,#16213e)}
 #pick-screen h2{font-size:2em;margin-bottom:30px;color:#c9a84c}
-.breed-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;max-width:600px;width:100%;padding:0 10px}
-@media(max-width:500px){.breed-grid{grid-template-columns:repeat(2,1fr)}}
+.breed-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;max-width:620px;width:100%;padding:0 10px}
+@media(max-width:520px){.breed-grid{grid-template-columns:repeat(2,1fr)}}
 .breed-card{background:#16213e;border:3px solid #333;border-radius:16px;padding:20px 14px;text-align:center;cursor:pointer;transition:all .25s}
 .breed-card:hover{border-color:#c9a84c;transform:translateY(-4px);box-shadow:0 8px 24px #0004}
 .breed-card.selected{border-color:#c9a84c;background:#1a2a4e}
-.breed-emoji{font-size:3.5em;margin-bottom:8px}
+.breed-preview{width:90px;height:70px;margin:0 auto 10px;position:relative}
 .breed-name{font-weight:bold;font-size:.95em;color:#e0e0e0}
 .breed-desc{font-size:.75em;color:#888;margin-top:4px}
 #pick-confirm{margin-top:30px;opacity:0;pointer-events:none;transition:all .3s}
@@ -41,30 +37,95 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:#1a1a2e;color:#e0e0e
 #name-input{background:#0d1b2a;border:2px solid #444;border-radius:10px;padding:12px 16px;color:#e0e0e0;font-size:1em;font-family:inherit;width:260px;text-align:center;margin:20px 0}
 #name-input:focus{outline:none;border-color:#c9a84c}
 
-/* GAME SCREEN */
+/* GAME */
 #game-screen{background:#1a1a2e;justify-content:flex-start;padding-top:20px}
 .game-header{width:100%;max-width:500px;display:flex;justify-content:space-between;align-items:center;padding:0 10px;margin-bottom:10px}
 .dog-name-display{font-size:1.4em;font-weight:bold;color:#c9a84c}
 .clock{font-size:1em;color:#aaa;background:#16213e;padding:6px 14px;border-radius:20px}
 
-/* DOG DISPLAY */
-.dog-area{width:100%;max-width:500px;height:280px;background:linear-gradient(180deg,#87CEEB 0%,#87CEEB 55%,#4a8f3f 55%,#3d7a34 100%);border-radius:20px;display:flex;align-items:flex-end;justify-content:center;position:relative;overflow:hidden;margin:10px 0}
-.dog-area.night{background:linear-gradient(180deg,#1a1a3e 0%,#1a1a3e 55%,#2a3a2a 55%,#1d2d1d 100%)}
-.dog-sprite{font-size:6em;position:relative;bottom:40px;transition:transform .3s;z-index:2}
-.dog-sprite.happy{animation:wag .4s ease 3}
-.dog-sprite.eating{animation:eat .3s ease 4}
-.dog-sprite.sleeping{animation:sleep 2s infinite;opacity:.85}
-.dog-sprite.walking{animation:walk .5s ease infinite}
-.dog-sprite.dirty{filter:sepia(.4) brightness(.85)}
-@keyframes wag{0%,100%{transform:rotate(0)}25%{transform:rotate(-8deg)}75%{transform:rotate(8deg)}}
-@keyframes eat{0%,100%{transform:translateY(0)}50%{transform:translateY(10px)}}
-@keyframes sleep{0%,100%{transform:scale(1)}50%{transform:scale(1.03)}}
-@keyframes walk{0%,100%{transform:translateX(0)}25%{transform:translateX(-20px)}75%{transform:translateX(20px)}}
-.mood-bubble{position:absolute;top:15px;right:20px;font-size:2em;animation:float 2s infinite}
+/* PLAY AREA */
+.dog-area{width:100%;max-width:500px;height:300px;background:linear-gradient(180deg,#87CEEB 0%,#87CEEB 50%,#4a8f3f 50%,#3d7a34 100%);border-radius:20px;position:relative;overflow:hidden;margin:10px 0}
+.dog-area.night{background:linear-gradient(180deg,#0d1230 0%,#1a1a3e 50%,#1a2a1a 50%,#1d2d1d 100%)}
+.mood-bubble{position:absolute;top:12px;right:16px;font-size:1.8em;animation:float 2s infinite;z-index:5}
 @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
-.sun{position:absolute;top:15px;left:20px;font-size:2.2em}
-.clouds{position:absolute;top:30px;left:60px;font-size:1.5em;animation:drift 8s linear infinite;opacity:.7}
-@keyframes drift{0%{transform:translateX(-80px)}100%{transform:translateX(400px)}}
+.sun{position:absolute;top:12px;left:16px;font-size:2em;z-index:5}
+.cloud{position:absolute;font-size:1.4em;opacity:.6;z-index:3}
+.cloud.c1{top:20px;animation:drift1 14s linear infinite}
+.cloud.c2{top:38px;animation:drift2 18s linear infinite;font-size:1em}
+@keyframes drift1{0%{left:-60px}100%{left:520px}}
+@keyframes drift2{0%{left:-40px}100%{left:540px}}
+
+/* 3D CSS DOG */
+.dog-entity{position:absolute;z-index:10;transition:none;pointer-events:none}
+.dog-body-wrap{position:relative;transform-style:preserve-3d;perspective:400px}
+/* Shadow */
+.dog-shadow{position:absolute;bottom:-6px;left:50%;transform:translateX(-50%);width:70px;height:14px;background:radial-gradient(ellipse,rgba(0,0,0,.35),transparent 70%);border-radius:50%}
+/* Body */
+.dog-body{width:60px;height:36px;border-radius:18px 18px 14px 14px;position:relative;box-shadow:inset -4px -4px 8px rgba(0,0,0,.25),inset 4px 4px 8px rgba(255,255,255,.12);transform:rotateX(-8deg)}
+/* Head */
+.dog-head{position:absolute;top:-10px;left:-14px;width:34px;height:30px;border-radius:50% 50% 40% 40%;box-shadow:inset -3px -3px 6px rgba(0,0,0,.2),inset 2px 2px 5px rgba(255,255,255,.1);z-index:2}
+.dog-head.facing-right{left:auto;right:-14px}
+/* Snout */
+.dog-snout{position:absolute;bottom:2px;left:2px;width:16px;height:10px;border-radius:50%;box-shadow:inset -1px -1px 3px rgba(0,0,0,.2)}
+.dog-head.facing-right .dog-snout{left:auto;right:2px}
+/* Eyes */
+.dog-eye{position:absolute;top:8px;width:5px;height:6px;background:#1a1a2e;border-radius:50%;z-index:3}
+.dog-eye.left{left:7px}.dog-eye.right{left:20px}
+.dog-eye.blink{height:2px;top:10px}
+.dog-head.facing-right .dog-eye.left{left:7px}.dog-head.facing-right .dog-eye.right{left:20px}
+/* Nose */
+.dog-nose{position:absolute;bottom:6px;left:4px;width:7px;height:5px;background:#222;border-radius:50%;z-index:3}
+.dog-head.facing-right .dog-nose{left:auto;right:4px}
+/* Ears */
+.dog-ear{position:absolute;top:-4px;width:12px;height:16px;border-radius:50% 50% 30% 30%;z-index:1}
+.dog-ear.left{left:0;transform:rotate(-15deg)}.dog-ear.right{right:0;transform:rotate(15deg)}
+.ear-floppy{border-radius:40%;top:0;height:20px}
+/* Legs */
+.dog-legs{position:absolute;bottom:-16px;left:4px;right:4px;display:flex;justify-content:space-between}
+.dog-leg{width:10px;height:18px;border-radius:4px 4px 6px 6px;box-shadow:inset -2px -2px 4px rgba(0,0,0,.2)}
+.dog-leg.walk-l{animation:legL .35s ease infinite alternate}
+.dog-leg.walk-r{animation:legR .35s ease infinite alternate}
+@keyframes legL{0%{transform:rotate(-12deg)}100%{transform:rotate(12deg)}}
+@keyframes legR{0%{transform:rotate(12deg)}100%{transform:rotate(-12deg)}}
+/* Tail */
+.dog-tail{position:absolute;top:0;right:-10px;width:8px;height:20px;border-radius:4px;transform-origin:bottom center;transform:rotate(-30deg)}
+.dog-tail.facing-right{right:auto;left:-10px;transform:rotate(30deg)}
+.dog-tail.wag{animation:tailWag .3s ease infinite alternate}
+@keyframes tailWag{0%{transform:rotate(-40deg)}100%{transform:rotate(-15deg)}}
+.dog-tail.wag.facing-right{animation:tailWagR .3s ease infinite alternate}
+@keyframes tailWagR{0%{transform:rotate(40deg)}100%{transform:rotate(15deg)}}
+/* Tongue */
+.dog-tongue{display:none;position:absolute;bottom:-2px;left:5px;width:6px;height:8px;background:#e86b6b;border-radius:0 0 50% 50%;z-index:4}
+.dog-head.facing-right .dog-tongue{left:auto;right:5px}
+.dog-tongue.show{display:block;animation:pant .5s ease infinite alternate}
+@keyframes pant{0%{height:6px}100%{height:10px}}
+/* ZZZ */
+.dog-zzz{display:none;position:absolute;top:-25px;right:-5px;font-size:14px;color:#c9a84c;z-index:10;animation:zzzFloat 1.5s ease infinite}
+.dog-zzz.show{display:block}
+@keyframes zzzFloat{0%{opacity:1;transform:translateY(0) scale(1)}100%{opacity:0;transform:translateY(-15px) scale(1.3)}}
+/* Dirty overlay */
+.dog-dirty-spots{display:none;position:absolute;top:5px;left:10px;font-size:10px;z-index:4}
+.dog-dirty-spots.show{display:block}
+
+/* Dachshund overrides */
+.breed-dachshund .dog-body{width:85px;height:28px;border-radius:14px}
+.breed-dachshund .dog-shadow{width:95px}
+.breed-dachshund .dog-head{top:-8px}
+.breed-dachshund .dog-legs{left:6px;right:6px}
+.breed-dachshund .dog-leg{height:14px;width:8px}
+
+/* Bulldog overrides */
+.breed-bulldog .dog-body{width:58px;height:40px;border-radius:20px}
+.breed-bulldog .dog-head{width:38px;height:34px;top:-12px;left:-16px}
+.breed-bulldog .dog-head.facing-right{left:auto;right:-16px}
+
+/* Poodle overrides */
+.breed-poodle .dog-body{border-radius:20px 20px 16px 16px}
+.breed-poodle .dog-head{border-radius:50%}
+.poodle-puff{position:absolute;width:14px;height:14px;border-radius:50%;z-index:1}
+
+/* Husky markings */
+.husky-mask{position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:18px;height:14px;background:white;border-radius:50% 50% 40% 40%;z-index:2;opacity:.85}
 
 /* STATS */
 .stats{width:100%;max-width:500px;display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:0 10px;margin:10px 0}
@@ -72,24 +133,19 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:#1a1a2e;color:#e0e0e
 .stat-label{font-size:.75em;color:#aaa;margin-bottom:4px;display:flex;align-items:center;gap:4px}
 .stat-bar-bg{width:100%;height:10px;background:#0d1b2a;border-radius:5px;overflow:hidden}
 .stat-bar{height:100%;border-radius:5px;transition:width .5s,background .5s}
-.stat-bar.high{background:#4caf50}
-.stat-bar.mid{background:#ff9800}
-.stat-bar.low{background:#e74c3c}
+.stat-bar.high{background:#4caf50}.stat-bar.mid{background:#ff9800}.stat-bar.low{background:#e74c3c}
 
 /* ACTIONS */
 .actions{width:100%;max-width:500px;display:grid;grid-template-columns:repeat(3,1fr);gap:8px;padding:0 10px;margin:10px 0}
 .action-btn{background:#16213e;border:2px solid #333;border-radius:12px;padding:12px 6px;text-align:center;cursor:pointer;transition:all .2s;font-family:inherit;color:#e0e0e0;font-size:.85em}
 .action-btn:hover:not(:disabled){border-color:#c9a84c;background:#1a2a4e;transform:scale(1.03)}
 .action-btn:disabled{opacity:.4;cursor:not-allowed}
-.action-btn .act-icon{font-size:1.8em;margin-bottom:4px}
-.action-btn .act-name{font-weight:bold}
-.action-btn .act-cost{font-size:.7em;color:#888;margin-top:2px}
+.action-btn .act-icon{font-size:1.8em;margin-bottom:4px}.action-btn .act-name{font-weight:bold}
 .cooldown-overlay{font-size:.75em;color:#ff9800;margin-top:2px}
 
 /* LOG */
 .log{width:100%;max-width:500px;background:#16213e;border-radius:12px;padding:12px;margin:10px 0 20px;max-height:100px;overflow-y:auto}
-.log-entry{font-size:.8em;color:#aaa;padding:3px 0;border-bottom:1px solid #222}
-.log-entry:last-child{border-bottom:none}
+.log-entry{font-size:.8em;color:#aaa;padding:3px 0;border-bottom:1px solid #222}.log-entry:last-child{border-bottom:none}
 .log-entry .log-time{color:#c9a84c;margin-right:6px}
 
 /* GAME OVER */
@@ -101,16 +157,14 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:#1a1a2e;color:#e0e0e
 </head>
 <body>
 
-<!-- TITLE -->
 <div class="screen active" id="title-screen">
-  <div class="title-emoji">🐕</div>
-  <h1 style="color:#c9a84c;">Puppy Pal</h1>
+  <div class="title-dog-wrap" id="title-dog"></div>
+  <h1>Puppy Pal</h1>
   <div class="tagline">Your virtual dog needs you!</div>
   <button class="btn btn-primary" onclick="showScreen('pick-screen')">New Puppy</button>
   <button class="btn btn-secondary" id="continue-btn" style="display:none" onclick="loadGame()">Continue</button>
 </div>
 
-<!-- PICK DOG -->
 <div class="screen" id="pick-screen">
   <h2>Choose Your Pup</h2>
   <div class="breed-grid" id="breed-grid"></div>
@@ -118,84 +172,123 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:#1a1a2e;color:#e0e0e
   <div id="pick-confirm"><button class="btn btn-primary" onclick="startGame()">Let's Go! 🐾</button></div>
 </div>
 
-<!-- GAME -->
 <div class="screen" id="game-screen">
   <div class="game-header">
     <div class="dog-name-display" id="dog-name-display"></div>
-    <div class="clock" id="clock">🕐 6:00 AM</div>
+    <div class="clock" id="clock">Day 1 · 6:00 AM</div>
   </div>
   <div class="dog-area" id="dog-area">
     <div class="sun" id="sun-icon">☀️</div>
-    <div class="clouds">☁️</div>
+    <div class="cloud c1">☁️</div>
+    <div class="cloud c2">☁️</div>
     <div class="mood-bubble" id="mood-bubble">😊</div>
-    <div class="dog-sprite" id="dog-sprite"></div>
+    <!-- dog entity injected here -->
   </div>
   <div class="stats" id="stats-area"></div>
   <div class="actions" id="actions-area"></div>
   <div class="log" id="log"></div>
 </div>
 
-<!-- GAME OVER -->
 <div class="screen" id="gameover-screen">
   <div class="go-emoji">😢</div>
   <h2>Your Pup Ran Away...</h2>
-  <div class="go-msg" id="go-msg">Your dog felt neglected and went to find a new home. Take better care next time!</div>
+  <div class="go-msg" id="go-msg"></div>
   <button class="btn btn-primary" onclick="resetGame()">Try Again</button>
 </div>
 
 <script>
-// ── BREEDS ──
+// ── BREED DATA ──
 const BREEDS = [
-  { id:'golden',   emoji:'🐕',  name:'Golden Retriever', desc:'Loyal & loving', color:'#D4A843' },
-  { id:'lab',      emoji:'🐕‍🦺', name:'Labrador',         desc:'Friendly & active', color:'#8B6914' },
-  { id:'poodle',   emoji:'🐩',  name:'Poodle',           desc:'Smart & elegant', color:'#D4A8D4' },
-  { id:'bulldog',  emoji:'🐶',  name:'Bulldog',          desc:'Tough but sweet', color:'#C4A882' },
-  { id:'husky',    emoji:'🐺',  name:'Husky',            desc:'Wild & energetic', color:'#A0C4E8' },
-  { id:'dachshund',emoji:'🌭',  name:'Dachshund',        desc:'Long & legendary', color:'#B8763C' },
+  { id:'golden',    name:'Golden Retriever', desc:'Loyal & loving',     bodyColor:'#D4A843',  headColor:'#C49A38', earColor:'#B8903A', legColor:'#BFA050', earStyle:'floppy', tailUp:false },
+  { id:'lab',       name:'Labrador',         desc:'Friendly & active',  bodyColor:'#C8A660',  headColor:'#B89850', earColor:'#A88840', legColor:'#B89850', earStyle:'floppy', tailUp:true },
+  { id:'poodle',    name:'Poodle',           desc:'Smart & elegant',    bodyColor:'#E8D8E8',  headColor:'#DDD0DD', earColor:'#C8B8C8', legColor:'#D0C0D0', earStyle:'floppy', tailUp:true },
+  { id:'bulldog',   name:'Bulldog',          desc:'Tough but sweet',    bodyColor:'#D4C0A0',  headColor:'#C8B490', earColor:'#B0A080', legColor:'#C0B090', earStyle:'normal', tailUp:false },
+  { id:'husky',     name:'Husky',            desc:'Wild & energetic',   bodyColor:'#A8B8C8',  headColor:'#98A8B8', earColor:'#8898A8', legColor:'#90A0B0', earStyle:'pointed', tailUp:true },
+  { id:'dachshund', name:'Dachshund',        desc:'Long & legendary',   bodyColor:'#A06830',  headColor:'#905828', earColor:'#805020', legColor:'#8A5E2A', earStyle:'floppy', tailUp:false },
 ];
 
-// ── STATS ──
 const STAT_DEFS = [
-  { id:'hunger',    icon:'🍖', label:'Hunger',    decay:0.8 },
-  { id:'happiness', icon:'❤️', label:'Happiness', decay:0.6 },
-  { id:'energy',    icon:'⚡', label:'Energy',    decay:0.5 },
-  { id:'bladder',   icon:'💧', label:'Bladder',   decay:1.0 },
-  { id:'clean',     icon:'✨', label:'Cleanliness',decay:0.3 },
-  { id:'health',    icon:'💚', label:'Health',     decay:0.15 },
+  { id:'hunger',    icon:'🍖', label:'Hunger',     decay:0.8 },
+  { id:'happiness', icon:'❤️', label:'Happiness',  decay:0.6 },
+  { id:'energy',    icon:'⚡', label:'Energy',     decay:0.5 },
+  { id:'bladder',   icon:'💧', label:'Bladder',    decay:1.0 },
+  { id:'clean',     icon:'✨', label:'Cleanliness', decay:0.3 },
+  { id:'health',    icon:'💚', label:'Health',      decay:0.15 },
 ];
 
-// ── ACTIONS ──
 const ACTIONS = [
-  { id:'feed',     icon:'🍖', name:'Feed',      cooldown:8,  effects:{hunger:30,health:3},          needs:{},            log:'munches happily!' },
-  { id:'pet',      icon:'🤗', name:'Pet',       cooldown:5,  effects:{happiness:20},                needs:{},            log:'wags tail excitedly!' },
-  { id:'walk',     icon:'🚶', name:'Walk',      cooldown:15, effects:{happiness:15,energy:-15,bladder:-25,health:5}, needs:{energy:15}, log:'enjoys the walk!' },
-  { id:'bathroom', icon:'🚽', name:'Bathroom',  cooldown:10, effects:{bladder:-40,clean:-5},        needs:{bladder:20},  log:'does their business!' },
-  { id:'bath',     icon:'🛁', name:'Bath',      cooldown:20, effects:{clean:40,happiness:-5},       needs:{},            log:'is squeaky clean!' },
-  { id:'play',     icon:'🎾', name:'Play',      cooldown:12, effects:{happiness:25,energy:-20,hunger:-5}, needs:{energy:20}, log:'plays fetch!' },
-  { id:'sleep',    icon:'😴', name:'Sleep',     cooldown:25, effects:{energy:40,health:5},          needs:{},            log:'takes a cozy nap... zzz' },
-  { id:'treat',    icon:'🦴', name:'Treat',     cooldown:10, effects:{happiness:15,hunger:10},      needs:{},            log:'loves the treat!' },
-  { id:'vet',      icon:'🏥', name:'Vet',       cooldown:30, effects:{health:30,happiness:-10},     needs:{},            log:'got a checkup!' },
+  { id:'feed',     icon:'🍖', name:'Feed',     cooldown:8,  effects:{hunger:30,health:3},                            needs:{},           log:'munches happily!' },
+  { id:'pet',      icon:'🤗', name:'Pet',      cooldown:5,  effects:{happiness:20},                                  needs:{},           log:'wags tail excitedly!' },
+  { id:'walk',     icon:'🚶', name:'Walk',     cooldown:15, effects:{happiness:15,energy:-15,bladder:-25,health:5},   needs:{energy:15},  log:'enjoys the walk!' },
+  { id:'bathroom', icon:'🚽', name:'Bathroom', cooldown:10, effects:{bladder:-40,clean:-5},                          needs:{bladder:20},  log:'does their business!' },
+  { id:'bath',     icon:'🛁', name:'Bath',     cooldown:20, effects:{clean:40,happiness:-5},                         needs:{},           log:'is squeaky clean!' },
+  { id:'play',     icon:'🎾', name:'Play',     cooldown:12, effects:{happiness:25,energy:-20,hunger:-5},             needs:{energy:20},  log:'plays fetch!' },
+  { id:'sleep',    icon:'😴', name:'Sleep',    cooldown:25, effects:{energy:40,health:5},                            needs:{},           log:'takes a cozy nap... zzz' },
+  { id:'treat',    icon:'🦴', name:'Treat',    cooldown:10, effects:{happiness:15,hunger:10},                        needs:{},           log:'loves the treat!' },
+  { id:'vet',      icon:'🏥', name:'Vet',      cooldown:30, effects:{health:30,happiness:-10},                       needs:{},           log:'got a checkup!' },
 ];
 
 // ── STATE ──
-let game = null;
-let tickInterval = null;
-let cooldowns = {};
+let game = null, tickInterval = null, cooldowns = {};
+let dogX = 200, dogY = 180, dogTargetX = 200, dogTargetY = 180, dogFacing = 'left';
+let dogState = 'idle'; // idle, walking, sleeping, eating, happy
+let blinkTimer = 0, moveTimer = 0, stateTimer = 0;
 
-// ── SCREENS ──
 function showScreen(id) {
   document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
   document.getElementById(id).classList.add('active');
 }
 
-// ── BREED SELECTION ──
+// ── BUILD CSS DOG HTML ──
+function buildDogHTML(breedId, scale) {
+  const b = BREEDS.find(x => x.id === breedId);
+  const s = scale || 1;
+  const earCls = b.earStyle === 'floppy' ? 'ear-floppy' : '';
+  const earTopStyle = b.earStyle === 'pointed' ? 'border-radius:30% 50% 20% 20%;' : '';
+  const breedCls = `breed-${b.id}`;
+  let extras = '';
+  if (b.id === 'husky') extras = `<div class="husky-mask"></div>`;
+  if (b.id === 'poodle') extras = `<div class="poodle-puff" style="top:-8px;left:-4px;background:${b.headColor};"></div><div class="poodle-puff" style="top:-8px;right:-4px;background:${b.headColor};"></div>`;
+
+  return `<div class="dog-body-wrap ${breedCls}" style="transform:scale(${s})">
+    <div class="dog-zzz" id="dog-zzz">💤</div>
+    <div class="dog-dirty-spots" id="dog-dirty">🟤🟤</div>
+    <div class="dog-head" id="dog-head" style="background:${b.headColor};">
+      <div class="dog-ear left ${earCls}" style="background:${b.earColor};${earTopStyle}"></div>
+      <div class="dog-ear right ${earCls}" style="background:${b.earColor};${earTopStyle}"></div>
+      <div class="dog-eye left" id="eye-l"></div>
+      <div class="dog-eye right" id="eye-r"></div>
+      <div class="dog-nose"></div>
+      <div class="dog-snout" style="background:${lighten(b.headColor,.15)};"></div>
+      <div class="dog-tongue" id="dog-tongue"></div>
+      ${extras}
+    </div>
+    <div class="dog-body" style="background:${b.bodyColor};"></div>
+    <div class="dog-tail" id="dog-tail" style="background:${b.earColor};${b.tailUp?'transform:rotate(-60deg);':''}"></div>
+    <div class="dog-legs">
+      <div class="dog-leg" id="leg1" style="background:${b.legColor};"></div>
+      <div class="dog-leg" id="leg2" style="background:${b.legColor};"></div>
+      <div class="dog-leg" id="leg3" style="background:${b.legColor};"></div>
+      <div class="dog-leg" id="leg4" style="background:${b.legColor};"></div>
+    </div>
+    <div class="dog-shadow"></div>
+  </div>`;
+}
+
+function lighten(hex, amt) {
+  let r = parseInt(hex.slice(1,3),16), g = parseInt(hex.slice(3,5),16), b = parseInt(hex.slice(5,7),16);
+  r = Math.min(255, r + Math.round(255*amt)); g = Math.min(255, g + Math.round(255*amt)); b = Math.min(255, b + Math.round(255*amt));
+  return `rgb(${r},${g},${b})`;
+}
+
+// ── BREED GRID ──
 function initBreedGrid() {
   const grid = document.getElementById('breed-grid');
   grid.innerHTML = '';
   BREEDS.forEach(b => {
     const card = document.createElement('div');
     card.className = 'breed-card';
-    card.innerHTML = `<div class="breed-emoji">${b.emoji}</div><div class="breed-name">${b.name}</div><div class="breed-desc">${b.desc}</div>`;
+    card.innerHTML = `<div class="breed-preview">${buildDogHTML(b.id, 0.9)}</div><div class="breed-name">${b.name}</div><div class="breed-desc">${b.desc}</div>`;
     card.onclick = () => {
       grid.querySelectorAll('.breed-card').forEach(c => c.classList.remove('selected'));
       card.classList.add('selected');
@@ -204,24 +297,16 @@ function initBreedGrid() {
     };
     grid.appendChild(card);
   });
+  // title dog
+  document.getElementById('title-dog').innerHTML = buildDogHTML('golden', 1.5);
 }
 
-// ── START ──
+// ── START/ENTER ──
 function startGame() {
   const nameInput = document.getElementById('name-input').value.trim();
   if (!game || !game.breed) return;
   const breed = BREEDS.find(b => b.id === game.breed);
-  const name = nameInput || breed.name;
-  game = {
-    breed: game.breed,
-    name: name,
-    stats: { hunger:80, happiness:80, energy:80, bladder:70, clean:90, health:100 },
-    time: 360, // 6:00 AM in minutes
-    day: 1,
-    log: [],
-    alive: true,
-    created: Date.now()
-  };
+  game = { breed:game.breed, name:nameInput||breed.name, stats:{hunger:80,happiness:80,energy:80,bladder:70,clean:90,health:100}, time:360, day:1, log:[], alive:true, created:Date.now() };
   cooldowns = {};
   saveGame();
   enterGame();
@@ -230,107 +315,156 @@ function startGame() {
 function enterGame() {
   showScreen('game-screen');
   const breed = BREEDS.find(b => b.id === game.breed);
-  document.getElementById('dog-name-display').textContent = `${breed.emoji} ${game.name}`;
-  renderStats();
-  renderActions();
-  renderLog();
-  updateDogArea();
-  updateClock();
+  document.getElementById('dog-name-display').textContent = game.name;
+
+  // Inject dog entity
+  let entity = document.getElementById('dog-entity');
+  if (!entity) { entity = document.createElement('div'); entity.id = 'dog-entity'; entity.className = 'dog-entity'; document.getElementById('dog-area').appendChild(entity); }
+  entity.innerHTML = buildDogHTML(game.breed, 1.2);
+
+  dogX = 200; dogY = 180; dogTargetX = 200; dogTargetY = 180;
+  dogState = 'idle'; dogFacing = 'left';
+  pickNewTarget();
+
+  renderStats(); renderActions(); renderLog(); updateDogVisuals(); updateClock();
   if (tickInterval) clearInterval(tickInterval);
-  tickInterval = setInterval(tick, 2000); // 1 game-minute = 2 real seconds
+  tickInterval = setInterval(tick, 2000);
+  requestAnimationFrame(animLoop);
+}
+
+// ── ANIMATION LOOP (movement) ──
+let lastFrame = 0;
+function animLoop(ts) {
+  if (!game || !game.alive) return;
+  const dt = Math.min((ts - lastFrame) / 1000, 0.1);
+  lastFrame = ts;
+
+  // Blink
+  blinkTimer -= dt;
+  if (blinkTimer <= 0) {
+    const el = document.getElementById('eye-l'), er = document.getElementById('eye-r');
+    if (el) { el.classList.add('blink'); er.classList.add('blink'); setTimeout(() => { el.classList.remove('blink'); er.classList.remove('blink'); }, 150); }
+    blinkTimer = 2 + Math.random() * 4;
+  }
+
+  // Movement
+  if (dogState === 'idle' || dogState === 'walking') {
+    const dx = dogTargetX - dogX, dy = dogTargetY - dogY;
+    const dist = Math.sqrt(dx*dx + dy*dy);
+    if (dist > 3) {
+      dogState = 'walking';
+      const speed = 40;
+      dogX += (dx / dist) * speed * dt;
+      dogY += (dy / dist) * speed * dt;
+      dogFacing = dx < 0 ? 'left' : 'right';
+    } else {
+      if (dogState === 'walking') { dogState = 'idle'; stateTimer = 1.5 + Math.random() * 3; }
+      stateTimer -= dt;
+      if (stateTimer <= 0) pickNewTarget();
+    }
+  } else if (dogState === 'sleeping' || dogState === 'eating' || dogState === 'happy') {
+    stateTimer -= dt;
+    if (stateTimer <= 0) { dogState = 'idle'; stateTimer = 1; }
+  }
+
+  // Position
+  const entity = document.getElementById('dog-entity');
+  if (entity) {
+    entity.style.left = dogX + 'px';
+    entity.style.top = dogY + 'px';
+    entity.style.transform = dogFacing === 'right' ? 'scaleX(-1)' : 'scaleX(1)';
+  }
+
+  // Leg animation
+  const legs = ['leg1','leg2','leg3','leg4'];
+  legs.forEach((id, i) => {
+    const el = document.getElementById(id);
+    if (!el) return;
+    if (dogState === 'walking') { el.classList.add(i % 2 === 0 ? 'walk-l' : 'walk-r'); }
+    else { el.classList.remove('walk-l', 'walk-r'); }
+  });
+
+  // Tail wag
+  const tail = document.getElementById('dog-tail');
+  if (tail) {
+    if (game.stats.happiness > 50 || dogState === 'happy') { tail.classList.add('wag'); if (dogFacing==='right') tail.classList.add('facing-right'); else tail.classList.remove('facing-right'); }
+    else { tail.classList.remove('wag'); }
+  }
+
+  // Head facing
+  const head = document.getElementById('dog-head');
+  if (head) { if (dogFacing === 'right') head.classList.add('facing-right'); else head.classList.remove('facing-right'); }
+
+  // Tongue
+  const tongue = document.getElementById('dog-tongue');
+  if (tongue) { if (game.stats.energy < 40 || dogState === 'happy') tongue.classList.add('show'); else tongue.classList.remove('show'); }
+
+  // ZZZ
+  const zzz = document.getElementById('dog-zzz');
+  if (zzz) { if (dogState === 'sleeping') zzz.classList.add('show'); else zzz.classList.remove('show'); }
+
+  // Dirty
+  const dirty = document.getElementById('dog-dirty');
+  if (dirty) { if (game.stats.clean < 30) dirty.classList.add('show'); else dirty.classList.remove('show'); }
+
+  requestAnimationFrame(animLoop);
+}
+
+function pickNewTarget() {
+  const area = document.getElementById('dog-area');
+  const w = area ? area.clientWidth : 460;
+  dogTargetX = 30 + Math.random() * (w - 100);
+  dogTargetY = 155 + Math.random() * 100; // grass area only
 }
 
 // ── GAME TICK ──
 function tick() {
   if (!game || !game.alive) return;
-
-  // Advance time
   game.time++;
   if (game.time >= 1440) { game.time = 0; game.day++; }
 
-  // Decay stats
-  STAT_DEFS.forEach(s => {
-    game.stats[s.id] = Math.max(0, Math.min(100, game.stats[s.id] - s.decay * 0.15));
-  });
+  STAT_DEFS.forEach(s => { game.stats[s.id] = Math.max(0, Math.min(100, game.stats[s.id] - s.decay * 0.15)); });
 
-  // Health penalty if other stats are critically low
   let crits = 0;
   ['hunger','happiness','bladder','clean'].forEach(k => { if (game.stats[k] < 15) crits++; });
   if (crits >= 2) game.stats.health = Math.max(0, game.stats.health - 0.3);
   if (game.stats.energy < 5) game.stats.health = Math.max(0, game.stats.health - 0.15);
 
-  // Bladder accident
   if (game.stats.bladder >= 95) {
-    game.stats.bladder = 30;
-    game.stats.clean = Math.max(0, game.stats.clean - 20);
-    game.stats.happiness = Math.max(0, game.stats.happiness - 10);
+    game.stats.bladder = 30; game.stats.clean = Math.max(0, game.stats.clean - 20); game.stats.happiness = Math.max(0, game.stats.happiness - 10);
     addLog('had an accident indoors! 💦');
   }
 
-  // Cooldowns
-  for (let k in cooldowns) {
-    if (cooldowns[k] > 0) cooldowns[k]--;
-  }
+  for (let k in cooldowns) { if (cooldowns[k] > 0) cooldowns[k]--; }
 
-  // Game over check
   if (game.stats.health <= 0) {
-    game.alive = false;
-    clearInterval(tickInterval);
-    saveGame();
-    showScreen('gameover-screen');
-    document.getElementById('go-msg').textContent = `${game.name} felt too neglected and ran away to find a better home. You made it ${game.day} day${game.day>1?'s':''}. Take better care next time!`;
-    return;
+    game.alive = false; clearInterval(tickInterval); saveGame();
+    document.getElementById('go-msg').textContent = `${game.name} felt too neglected and ran away. You made it ${game.day} day${game.day>1?'s':''}. Take better care next time!`;
+    showScreen('gameover-screen'); return;
   }
 
-  renderStats();
-  renderActions();
-  updateDogArea();
-  updateClock();
-
-  // Auto-save every 30 ticks
+  renderStats(); renderActions(); updateDogVisuals(); updateClock();
   if (game.time % 30 === 0) saveGame();
 }
 
-// ── ACTIONS ──
 function doAction(actionId) {
   const action = ACTIONS.find(a => a.id === actionId);
   if (!action || cooldowns[actionId] > 0) return;
-
-  // Check needs
-  for (let k in action.needs) {
-    if (game.stats[k] < action.needs[k]) {
-      addLog(`can't ${action.name.toLowerCase()} right now...`);
-      return;
-    }
-  }
-
-  // Apply effects
-  for (let k in action.effects) {
-    game.stats[k] = Math.max(0, Math.min(100, game.stats[k] + action.effects[k]));
-  }
-
+  for (let k in action.needs) { if (game.stats[k] < action.needs[k]) { addLog(`can't ${action.name.toLowerCase()} right now...`); return; } }
+  for (let k in action.effects) { game.stats[k] = Math.max(0, Math.min(100, game.stats[k] + action.effects[k])); }
   cooldowns[actionId] = action.cooldown;
   addLog(action.log);
 
-  // Sprite animation
-  const sprite = document.getElementById('dog-sprite');
-  sprite.classList.remove('happy','eating','sleeping','walking');
-  if (actionId === 'feed' || actionId === 'treat') sprite.classList.add('eating');
-  else if (actionId === 'sleep') sprite.classList.add('sleeping');
-  else if (actionId === 'walk') sprite.classList.add('walking');
-  else sprite.classList.add('happy');
-  setTimeout(() => sprite.classList.remove('happy','eating','sleeping','walking'), 1500);
+  if (actionId === 'sleep') { dogState = 'sleeping'; stateTimer = 4; }
+  else if (actionId === 'feed' || actionId === 'treat') { dogState = 'eating'; stateTimer = 2; }
+  else { dogState = 'happy'; stateTimer = 2; }
 
-  saveGame();
-  renderStats();
-  renderActions();
-  updateDogArea();
+  saveGame(); renderStats(); renderActions(); updateDogVisuals();
 }
 
-// ── RENDERING ──
+// ── RENDER ──
 function renderStats() {
-  const area = document.getElementById('stats-area');
-  area.innerHTML = '';
+  const area = document.getElementById('stats-area'); area.innerHTML = '';
   STAT_DEFS.forEach(s => {
     const val = Math.round(game.stats[s.id]);
     const lvl = val > 60 ? 'high' : val > 30 ? 'mid' : 'low';
@@ -339,22 +473,16 @@ function renderStats() {
 }
 
 function renderActions() {
-  const area = document.getElementById('actions-area');
-  area.innerHTML = '';
+  const area = document.getElementById('actions-area'); area.innerHTML = '';
   ACTIONS.forEach(a => {
     const cd = cooldowns[a.id] || 0;
-    const disabled = cd > 0;
-    area.innerHTML += `<button class="action-btn" ${disabled?'disabled':''} onclick="doAction('${a.id}')"><div class="act-icon">${a.icon}</div><div class="act-name">${a.name}</div>${disabled ? `<div class="cooldown-overlay">⏳ ${cd}</div>` : `<div class="act-cost">&nbsp;</div>`}</button>`;
+    area.innerHTML += `<button class="action-btn" ${cd>0?'disabled':''} onclick="doAction('${a.id}')"><div class="act-icon">${a.icon}</div><div class="act-name">${a.name}</div>${cd>0?`<div class="cooldown-overlay">⏳ ${cd}</div>`:''}</button>`;
   });
 }
 
 function renderLog() {
-  const log = document.getElementById('log');
-  log.innerHTML = '';
-  const entries = (game.log || []).slice(-6);
-  entries.forEach(e => {
-    log.innerHTML += `<div class="log-entry"><span class="log-time">${e.time}</span>${game.name} ${e.text}</div>`;
-  });
+  const log = document.getElementById('log'); log.innerHTML = '';
+  (game.log || []).slice(-6).forEach(e => { log.innerHTML += `<div class="log-entry"><span class="log-time">${e.time}</span>${game.name} ${e.text}</div>`; });
   log.scrollTop = log.scrollHeight;
 }
 
@@ -366,87 +494,39 @@ function addLog(text) {
 }
 
 function updateClock() {
-  const h = Math.floor(game.time / 60) % 24;
-  const m = game.time % 60;
-  const ampm = h < 12 ? 'AM' : 'PM';
-  const h12 = h === 0 ? 12 : h > 12 ? h - 12 : h;
+  const h = Math.floor(game.time/60)%24, m = game.time%60, ampm = h<12?'AM':'PM', h12 = h===0?12:h>12?h-12:h;
   document.getElementById('clock').textContent = `Day ${game.day} · ${h12}:${String(m).padStart(2,'0')} ${ampm}`;
 }
+function formatTime(t) { const h=Math.floor(t/60)%24,m=t%60,ap=h<12?'AM':'PM',h12=h===0?12:h>12?h-12:h; return `${h12}:${String(m).padStart(2,'0')}${ap}`; }
 
-function formatTime(t) {
-  const h = Math.floor(t / 60) % 24;
-  const m = t % 60;
-  const ampm = h < 12 ? 'AM' : 'PM';
-  const h12 = h === 0 ? 12 : h > 12 ? h - 12 : h;
-  return `${h12}:${String(m).padStart(2,'0')}${ampm}`;
-}
-
-function updateDogArea() {
-  const breed = BREEDS.find(b => b.id === game.breed);
-  const sprite = document.getElementById('dog-sprite');
-  sprite.textContent = breed.emoji;
-
-  // Dirty filter
-  if (game.stats.clean < 30) sprite.classList.add('dirty');
-  else sprite.classList.remove('dirty');
-
-  // Mood bubble
+function updateDogVisuals() {
   const mood = document.getElementById('mood-bubble');
-  const h = game.stats.hunger, hp = game.stats.happiness, e = game.stats.energy, bl = game.stats.bladder;
-  if (game.stats.health < 20) mood.textContent = '🤒';
-  else if (h < 20) mood.textContent = '🍖';
-  else if (bl > 80) mood.textContent = '💧';
-  else if (e < 20) mood.textContent = '😴';
-  else if (hp > 70) mood.textContent = '😊';
-  else if (hp > 40) mood.textContent = '😐';
-  else mood.textContent = '😢';
+  const {hunger:h,happiness:hp,energy:e,bladder:bl,health:hl} = game.stats;
+  if (hl<20) mood.textContent='🤒'; else if(h<20) mood.textContent='🍖'; else if(bl>80) mood.textContent='💧'; else if(e<20) mood.textContent='😴'; else if(hp>70) mood.textContent='😊'; else if(hp>40) mood.textContent='😐'; else mood.textContent='😢';
 
-  // Day/night
-  const hour = Math.floor(game.time / 60) % 24;
-  const area = document.getElementById('dog-area');
-  const sun = document.getElementById('sun-icon');
-  if (hour >= 20 || hour < 6) {
-    area.classList.add('night');
-    sun.textContent = '🌙';
-  } else {
-    area.classList.remove('night');
-    sun.textContent = '☀️';
-  }
+  const hour = Math.floor(game.time/60)%24;
+  const area = document.getElementById('dog-area'), sun = document.getElementById('sun-icon');
+  if (hour>=20||hour<6) { area.classList.add('night'); sun.textContent='🌙'; } else { area.classList.remove('night'); sun.textContent='☀️'; }
 }
 
 // ── SAVE/LOAD ──
-function saveGame() {
-  if (game) localStorage.setItem('puppypal_save', JSON.stringify(game));
-}
-
+function saveGame() { if(game) localStorage.setItem('puppypal_save', JSON.stringify(game)); }
 function loadGame() {
-  const data = localStorage.getItem('puppypal_save');
-  if (!data) return;
-  game = JSON.parse(data);
-  if (!game.alive) { resetGame(); return; }
-  cooldowns = {};
-  enterGame();
+  const d = localStorage.getItem('puppypal_save'); if(!d) return;
+  game = JSON.parse(d); if(!game.alive){resetGame();return;}
+  cooldowns = {}; enterGame();
 }
-
 function resetGame() {
-  localStorage.removeItem('puppypal_save');
-  game = null;
-  cooldowns = {};
-  if (tickInterval) clearInterval(tickInterval);
-  showScreen('title-screen');
-  document.getElementById('continue-btn').style.display = 'none';
+  localStorage.removeItem('puppypal_save'); game=null; cooldowns={};
+  if(tickInterval) clearInterval(tickInterval);
+  showScreen('title-screen'); document.getElementById('continue-btn').style.display='none';
 }
 
 // ── INIT ──
 window.onload = () => {
   initBreedGrid();
   const save = localStorage.getItem('puppypal_save');
-  if (save) {
-    const parsed = JSON.parse(save);
-    if (parsed && parsed.alive) {
-      document.getElementById('continue-btn').style.display = 'inline-block';
-    }
-  }
+  if(save){const p=JSON.parse(save);if(p&&p.alive)document.getElementById('continue-btn').style.display='inline-block';}
 };
 </script>
 </body>
