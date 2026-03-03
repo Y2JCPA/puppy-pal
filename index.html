@@ -156,24 +156,24 @@ const BREEDS=[
 ];
 
 const STATS=[
-  {id:'hunger',icon:'🍖',label:'Hunger',decay:.8},
-  {id:'happiness',icon:'❤️',label:'Happiness',decay:.6},
-  {id:'energy',icon:'⚡',label:'Energy',decay:.5},
-  {id:'bladder',icon:'💧',label:'Bladder',decay:1},
-  {id:'clean',icon:'✨',label:'Clean',decay:.3},
-  {id:'health',icon:'💚',label:'Health',decay:.15},
+  {id:'hunger',icon:'🍖',label:'Hunger',decay:2.4},
+  {id:'happiness',icon:'❤️',label:'Happiness',decay:1.8},
+  {id:'energy',icon:'⚡',label:'Energy',decay:1.6},
+  {id:'bladder',icon:'💧',label:'Bladder',decay:3.0},
+  {id:'clean',icon:'✨',label:'Clean',decay:1.0},
+  {id:'health',icon:'💚',label:'Health',decay:.4},
 ];
 
 const ACTIONS=[
-  {id:'feed',icon:'🍖',name:'Feed',cd:8,fx:{hunger:30,health:3},need:{},msg:'munches happily!',anim:'eat',particles:['🍖','✨','😋']},
-  {id:'pet',icon:'🤗',name:'Pet',cd:5,fx:{happiness:20},need:{},msg:'wags tail excitedly!',anim:'pet',particles:['❤️','💕','💖','🥰']},
-  {id:'walk',icon:'🚶',name:'Walk',cd:15,fx:{happiness:15,energy:-15,bladder:-25,health:5},need:{energy:15},msg:'enjoys the walk!',anim:'walk',particles:['🐾','🌿','🦋']},
-  {id:'bathroom',icon:'🚽',name:'Bathroom',cd:10,fx:{bladder:-40,clean:-5},need:{bladder:20},msg:'does their business!',anim:'idle',particles:['💨']},
-  {id:'bath',icon:'🛁',name:'Bath',cd:20,fx:{clean:40,happiness:-5},need:{},msg:'is squeaky clean!',anim:'bath',particles:['🫧','🫧','🫧','✨','💧']},
-  {id:'play',icon:'🎾',name:'Play',cd:12,fx:{happiness:25,energy:-20,hunger:-5},need:{energy:20},msg:'plays fetch!',anim:'play',particles:['🎾','⭐','🌟','🎉']},
-  {id:'sleep',icon:'😴',name:'Sleep',cd:25,fx:{energy:40,health:5},need:{},msg:'takes a cozy nap...',anim:'sleep',particles:['💤','💤','⭐']},
-  {id:'treat',icon:'🦴',name:'Treat',cd:10,fx:{happiness:15,hunger:10},need:{},msg:'loves the treat!',anim:'eat',particles:['🦴','❤️','😍']},
-  {id:'vet',icon:'🏥',name:'Vet',cd:30,fx:{health:30,happiness:-10},need:{},msg:'got a checkup!',anim:'idle',particles:['💊','🩹','💚']},
+  {id:'feed',icon:'🍖',name:'Feed',cd:10,fx:{hunger:20,health:2},need:{},msg:'munches happily!',anim:'eat',particles:['🍖','✨','😋']},
+  {id:'pet',icon:'🤗',name:'Pet',cd:7,fx:{happiness:12},need:{},msg:'wags tail excitedly!',anim:'pet',particles:['❤️','💕','💖','🥰']},
+  {id:'walk',icon:'🚶',name:'Walk',cd:18,fx:{happiness:10,energy:-18,bladder:-20,health:4},need:{energy:15},msg:'enjoys the walk!',anim:'walk',particles:['🐾','🌿','🦋']},
+  {id:'bathroom',icon:'🚽',name:'Bathroom',cd:12,fx:{bladder:-30,clean:-8},need:{bladder:20},msg:'does their business!',anim:'idle',particles:['💨']},
+  {id:'bath',icon:'🛁',name:'Bath',cd:22,fx:{clean:25,happiness:-8},need:{},msg:'is squeaky clean!',anim:'bath',particles:['🫧','🫧','🫧','✨','💧']},
+  {id:'play',icon:'🎾',name:'Play',cd:14,fx:{happiness:18,energy:-22,hunger:-8},need:{energy:20},msg:'plays fetch!',anim:'play',particles:['🎾','⭐','🌟','🎉']},
+  {id:'sleep',icon:'😴',name:'Sleep',cd:28,fx:{energy:28,health:3},need:{},msg:'takes a cozy nap...',anim:'sleep',particles:['💤','💤','⭐']},
+  {id:'treat',icon:'🦴',name:'Treat',cd:12,fx:{happiness:10,hunger:8},need:{},msg:'loves the treat!',anim:'eat',particles:['🦴','❤️','😍']},
+  {id:'vet',icon:'🏥',name:'Vet',cd:35,fx:{health:20,happiness:-12},need:{},msg:'got a checkup!',anim:'idle',particles:['💊','🩹','💚']},
 ];
 
 // ═══════════════════════════════════════
@@ -557,8 +557,9 @@ function tick(){
   G.time++;if(G.time>=1440){G.time=0;G.day++;}
   STATS.forEach(s=>{G.stats[s.id]=clamp(G.stats[s.id]-s.decay*.15);});
   let crits=0;['hunger','happiness','bladder','clean'].forEach(k=>{if(G.stats[k]<15)crits++;});
-  if(crits>=2)G.stats.health=clamp(G.stats.health-.3);
-  if(G.stats.energy<5)G.stats.health=clamp(G.stats.health-.15);
+  if(crits>=2)G.stats.health=clamp(G.stats.health-.8);
+  if(crits>=3)G.stats.health=clamp(G.stats.health-1.2);
+  if(G.stats.energy<5)G.stats.health=clamp(G.stats.health-.4);
   if(G.stats.bladder>=95){G.stats.bladder=30;G.stats.clean=clamp(G.stats.clean-20);G.stats.happiness=clamp(G.stats.happiness-10);addLog('had an accident! 💦');spawnParticles(['💦','💦'],2);}
   for(let k in cooldowns){if(cooldowns[k]>0)cooldowns[k]--;}
   if(G.stats.health<=0){G.alive=false;clearInterval(tickI);saveGame();document.getElementById('go-msg').textContent=`${G.name} felt neglected and ran away after ${G.day} day${G.day>1?'s':''}. Take better care next time!`;showScreen('gameover-screen');return;}
